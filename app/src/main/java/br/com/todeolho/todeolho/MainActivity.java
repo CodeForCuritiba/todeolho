@@ -1,6 +1,8 @@
 package br.com.todeolho.todeolho;
 
+import android.app.ActionBar;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,9 +10,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,9 +39,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        toolbar.setTitle(getString(R.string.titulo_pesquisar));
+
         setSupportActionBar(toolbar);
 
-        toolbar.setTitle("PESQUISAR");
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -101,7 +107,27 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            Fragment fragment = null;
+            switch (position){
+                case 0:
+                    fragment = new PesquisarFragment();
+                    break;
+                case 1:
+                    fragment = new AmigosFragment();
+                    break;
+                case 2:
+                    fragment = new RankingFragment();
+                    break;
+                case 3:
+                    fragment = new HistoricoFragment();
+                    break;
+                case 4:
+                    fragment = new PerfilFragment();
+                    break;
+            }
+
+
+            return fragment;
         }
 
         @Override
