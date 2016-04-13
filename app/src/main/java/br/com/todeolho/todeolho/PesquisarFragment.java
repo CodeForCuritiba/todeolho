@@ -27,8 +27,16 @@ public class PesquisarFragment extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_pesquisar, container, false);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+//        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+//        mapFragment.getMapAsync(this);
+//        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+//        xmlns:map="http://schemas.android.com/apk/res-auto"
+//        xmlns:tools="http://schemas.android.com/tools"
+//        android:id="@+id/map"
+//        android:name="com.google.android.gms.maps.SupportMapFragment"
+//        android:layout_width="match_parent"
+//        android:layout_height="match_parent"
+//        tools:context="br.com.todeolho.todeolho.MainActivity" />
 
         return rootView;
     }
