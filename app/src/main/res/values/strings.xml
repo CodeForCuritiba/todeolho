@@ -9,4 +9,8 @@
     <string name="logarfacebook">Logar pelo Facebook</string>
     <string name="ajuda">Precisa de ajuda?</string>
     <string name="titulo_pesquisar">PESQUISAR</string>
+    <string name="titulo_amigos">AMIGOS</string>
+    <string name="titulo_historico">HISTÓRICO</string>
+    <string name="titulo_perfil">PERFIL</string>
+    <string name="titulo_ranking">RANKING</string>
 </resources>

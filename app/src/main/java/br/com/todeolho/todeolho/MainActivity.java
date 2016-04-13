@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  implements ViewPager.OnPageChangeListener{
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -39,11 +40,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
         toolbar.setTitle(getString(R.string.titulo_pesquisar));
-
         setSupportActionBar(toolbar);
-
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -52,45 +50,52 @@ public class MainActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.addOnPageChangeListener(this);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+
         tabLayout.setupWithViewPager(mViewPager);
+
+        tabLayout.getTabAt(0).setIcon(R.drawable.icon_pesquisa);
+        tabLayout.getTabAt(1).setIcon(R.drawable.icon_amigos);
+        tabLayout.getTabAt(2).setIcon(R.drawable.icon_ranking);
+        tabLayout.getTabAt(3).setIcon(R.drawable.icon_historico);
+        tabLayout.getTabAt(4).setIcon(R.drawable.icon_perfil);
 
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-        public PlaceholderFragment() {
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        switch (position){
+            case 0:
+                toolbar.setTitle(getString(R.string.titulo_pesquisar));
+                break;
+            case 1:
+                toolbar.setTitle(getString(R.string.titulo_amigos));
+                break;
+            case 2:
+                toolbar.setTitle(getString(R.string.titulo_ranking));
+                break;
+            case 3:
+                toolbar.setTitle(getString(R.string.titulo_historico));
+                break;
+            case 4:
+                toolbar.setTitle(getString(R.string.titulo_perfil));
+                break;
         }
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
+        setSupportActionBar(toolbar);
+    }
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_pesquisar, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-//            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 
     /**
@@ -138,19 +143,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "SECTION 1";
-                case 1:
-                    return "SECTION 2";
-                case 2:
-                    return "SECTION 3";
-                case 3:
-                    return "SECTION 3";
-                case 4:
-                    return "SECTION 3";
-            }
-            return null;
+            return "";
         }
     }
 }
