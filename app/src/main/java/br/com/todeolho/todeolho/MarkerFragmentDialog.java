@@ -24,7 +24,6 @@ public class MarkerFragmentDialog extends DialogFragment implements View.OnClick
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View v = inflater.inflate(R.layout.info_marker, null);
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -42,6 +41,11 @@ public class MarkerFragmentDialog extends DialogFragment implements View.OnClick
             Toast.makeText(getActivity(), "Avaliar", Toast.LENGTH_LONG).show();
         } else if (v.getId() == R.id.btnFiscalize) {
             Toast.makeText(getActivity(), "Fiscalizar", Toast.LENGTH_LONG).show();
+
+            FiscalizarFragment fiscalizar = new FiscalizarFragment();
+            getFragmentManager().beginTransaction().add(fiscalizar, "teste").commit();
+
+            dismiss();
         } else if (v.getId() == R.id.btnFechar){
             Toast.makeText(getActivity(), "Fechar", Toast.LENGTH_LONG).show();
         }

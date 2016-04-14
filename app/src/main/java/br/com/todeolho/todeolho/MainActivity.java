@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity  implements ViewPager.OnPage
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
+
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -130,8 +131,6 @@ public class MainActivity extends AppCompatActivity  implements ViewPager.OnPage
                     fragment = new PerfilFragment();
                     break;
             }
-
-
             return fragment;
         }
 
