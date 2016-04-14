@@ -14,10 +14,9 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:paddingTop="30dp"
+        android:paddingBottom="30dp"
         android:paddingLeft="40dp"
         android:paddingRight="40dp">
-
-
 
         <br.com.todeolho.todeolho.component.CustomTextView
             android:layout_width="wrap_content"
@@ -34,27 +33,6 @@
             <!--android:layout_height="wrap_content"-->
             <!--android:layout_marginTop="20dp"-->
             <!--android:src=""/>-->
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_obra"/>
-
-            <br.com.todeolho.todeolho.component.CustomTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:textSize="16sp"
-                android:layout_gravity="center_vertical"
-                android:textColor="@color/colorWhite"
-                android:text="obra em andamento"/>
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -93,6 +71,7 @@
         </LinearLayout>
 
         <br.com.todeolho.todeolho.component.CustomButton
+            android:id="@+id/btnFiscalize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -102,6 +81,7 @@
             android:text="FISCALIZE AGORA!"/>
 
         <br.com.todeolho.todeolho.component.CustomButton
+            android:id="@+id/btnAvalie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -113,6 +93,7 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/btnFechar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingRight="5dp"
