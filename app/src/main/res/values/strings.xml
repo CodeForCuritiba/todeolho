@@ -13,4 +13,6 @@
     <string name="titulo_historico">HISTÓRICO</string>
     <string name="titulo_perfil">PERFIL</string>
     <string name="titulo_ranking">RANKING</string>
+    <string name="start_date">Início</string>
+    <string name="end_date">Término</string>
 </resources>

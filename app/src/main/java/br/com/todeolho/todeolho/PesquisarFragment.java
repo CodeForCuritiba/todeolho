@@ -29,15 +29,21 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
+import java.util.HashMap;
+
+import br.com.todeolho.todeolho.model.MapMarker;
 
 /**
  * Created by gustavomagalhaes on 4/11/16.
@@ -45,6 +51,7 @@ import java.net.URLEncoder;
 public class PesquisarFragment extends SupportMapFragment implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleMap mMap;
+    private HashMap<String, JSONObject> mMarkersData = new HashMap<>();
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
     private RequestQueue mQueue;
@@ -108,6 +115,9 @@ public class PesquisarFragment extends SupportMapFragment implements OnMapReadyC
         //Get API data using map boundaries
         mMap = googleMap;
         if (ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+            final BitmapDescriptor mapMarkerIcon = BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker);
+
             //Disabled until we have all the country covered
             //mMap.setMyLocationEnabled(true);
             mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
@@ -126,11 +136,15 @@ public class PesquisarFragment extends SupportMapFragment implements OnMapReadyC
                             public void onResponse(String response) {
                                 try {
                                     mMap.clear();
+                                    mMarkersData = new HashMap<String, JSONObject>();
                                     JSONArray markers = new JSONArray(response);
                                     for (int i = 0; markers != null && i < markers.length(); i++) {
                                         JSONObject mark = markers.optJSONObject(i);
-                                        MarkerOptions mo = new MarkerOptions().position(new LatLng(mark.getDouble("lat"), mark.getDouble("lon")));
-                                        mMap.addMarker(mo);
+                                        MarkerOptions mo = new MarkerOptions()
+                                                .position(new LatLng(mark.getDouble("lat"), mark.getDouble("lon")))
+                                                .icon(mapMarkerIcon);
+                                        Marker mAux = mMap.addMarker(mo);
+                                        mMarkersData.put(mAux.getId(), mark);
                                     }
                                 } catch (Exception ex) {
                                     Log.e(Constants.TAG, "onResponse: ", ex);
@@ -164,6 +178,22 @@ public class PesquisarFragment extends SupportMapFragment implements OnMapReadyC
 //        else {
 //
 //        }
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                JSONObject data = mMarkersData.get(marker.getId());
+                if (data != null) {
+                    MarkerFragmentDialog dialog = new MarkerFragmentDialog();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("marker", new MapMarker(data));
+                    dialog.setArguments(bundle);
+                    dialog.show(getActivity().getSupportFragmentManager(), "teste");
+                    return true;
+                }
+                return false;
+            }
+        });
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);

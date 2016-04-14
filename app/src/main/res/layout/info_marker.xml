@@ -1,104 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <RelativeLayout
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="marker" type="br.com.todeolho.todeolho.model.MapMarker"/>
+    </data>
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/marker_radius"
-        android:alpha=".7"/>
+        android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:paddingTop="30dp"
-        android:paddingBottom="30dp"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/marker_radius"
+            android:alpha=".7"/>
 
-        <br.com.todeolho.todeolho.component.CustomTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="20dp"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical" android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:textColor="@color/colorWhite"
-            android:textSize="25sp"
-            android:textAllCaps="true"
-            android:text="reforma do pátio na escola estadual do paraná"/>
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp">
 
-        <!--<ImageView-->
+            <br.com.todeolho.todeolho.component.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:gravity="center_horizontal"
+                android:textColor="@color/colorWhite"
+                android:textSize="25sp"
+                android:textAllCaps="true"
+                android:id="@+id/title"
+                android:text="@{marker.title}"/>
+
+            <!--<ImageView-->
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content"-->
             <!--android:layout_marginTop="20dp"-->
             <!--android:src=""/>-->
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <ImageView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_ampulheta"/>
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-            <LinearLayout
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_ampulheta"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <br.com.todeolho.todeolho.component.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorWhite"
+                        android:id="@+id/date_start"
+                        android:text="@{@string/start_date+`: `+marker.startDate}"/>
+
+                    <br.com.todeolho.todeolho.component.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorWhite"
+                        android:id="@+id/date_end"
+                        android:text="@{@string/end_date+`: `+marker.endDate}"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <br.com.todeolho.todeolho.component.CustomButton
+                android:id="@+id/btnFiscalize"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="30dp"
+                android:textColor="@color/colorWhite"
+                android:textSize="17sp"
+                android:background="@drawable/button_marker"
+                android:text="FISCALIZE AGORA!"/>
 
-                <br.com.todeolho.todeolho.component.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorWhite"
-                    android:text="inicio: XX/XX/XX"/>
+            <br.com.todeolho.todeolho.component.CustomButton
+                android:id="@+id/btnAvalie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/colorWhite"
+                android:textSize="17sp"
+                android:background="@drawable/button_marker"
+                android:text="AVALIAÇÕES"/>
 
-                <br.com.todeolho.todeolho.component.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorWhite"
-                    android:text="término: XX/XX/XX"/>
-
-            </LinearLayout>
         </LinearLayout>
 
-        <br.com.todeolho.todeolho.component.CustomButton
-            android:id="@+id/btnFiscalize"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/btnFechar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:textColor="@color/colorWhite"
-            android:textSize="17sp"
-            android:background="@drawable/button_marker"
-            android:text="FISCALIZE AGORA!"/>
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:layout_gravity="right"
+            android:src="@drawable/ic_close"/>
 
-        <br.com.todeolho.todeolho.component.CustomButton
-            android:id="@+id/btnAvalie"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:textColor="@color/colorWhite"
-            android:textSize="17sp"
-            android:background="@drawable/button_marker"
-            android:text="AVALIAÇÕES"/>
-
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/btnFechar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingRight="5dp"
-        android:paddingTop="5dp"
-        android:layout_gravity="right"
-        android:src="@drawable/ic_close"/>
-
-</FrameLayout>
+    </FrameLayout>
+</layout>
