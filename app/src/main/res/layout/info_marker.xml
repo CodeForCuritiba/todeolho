@@ -29,11 +29,11 @@
             android:textAllCaps="true"
             android:text="reforma do pátio na escola estadual do paraná"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:src=""/>
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:src=""/>-->
 
         <LinearLayout
             android:layout_width="wrap_content"
