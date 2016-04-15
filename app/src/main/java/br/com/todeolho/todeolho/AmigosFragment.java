@@ -18,15 +18,15 @@ public class AmigosFragment extends Fragment{
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_amigos, container, false);
 
-        Button btn = (Button) rootView.findViewById(R.id.btnTeste);
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MarkerFragmentDialog dialog = new MarkerFragmentDialog();
-                dialog.show(getActivity().getSupportFragmentManager(), "teste");
-            }
-        });
+//        Button btn = (Button) rootView.findViewById(R.id.btnTeste);
+//
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                MarkerFragmentDialog dialog = new MarkerFragmentDialog();
+//                dialog.show(getActivity().getSupportFragmentManager(), "teste");
+//            }
+//        });
 
         return rootView;
     }

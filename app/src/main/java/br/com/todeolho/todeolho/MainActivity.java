@@ -58,10 +58,11 @@ public class MainActivity extends AppCompatActivity  implements ViewPager.OnPage
         tabLayout.setupWithViewPager(mViewPager);
 
         tabLayout.getTabAt(0).setIcon(R.drawable.icon_pesquisa);
-        tabLayout.getTabAt(1).setIcon(R.drawable.icon_amigos);
+        tabLayout.getTabAt(1).setIcon(R.drawable.icon_perfil);
         tabLayout.getTabAt(2).setIcon(R.drawable.icon_ranking);
-        tabLayout.getTabAt(3).setIcon(R.drawable.icon_historico);
-        tabLayout.getTabAt(4).setIcon(R.drawable.icon_perfil);
+        tabLayout.getTabAt(3).setIcon(R.drawable.icon_amigos);
+        tabLayout.getTabAt(4).setIcon(R.drawable.icon_historico);
+
 
     }
 
@@ -78,16 +79,16 @@ public class MainActivity extends AppCompatActivity  implements ViewPager.OnPage
                 toolbar.setTitle(getString(R.string.titulo_pesquisar));
                 break;
             case 1:
-                toolbar.setTitle(getString(R.string.titulo_amigos));
+                toolbar.setTitle(getString(R.string.titulo_perfil));
                 break;
             case 2:
                 toolbar.setTitle(getString(R.string.titulo_ranking));
                 break;
             case 3:
-                toolbar.setTitle(getString(R.string.titulo_historico));
+                toolbar.setTitle(getString(R.string.titulo_amigos));
                 break;
             case 4:
-                toolbar.setTitle(getString(R.string.titulo_perfil));
+                toolbar.setTitle(getString(R.string.titulo_historico));
                 break;
         }
 
@@ -119,16 +120,16 @@ public class MainActivity extends AppCompatActivity  implements ViewPager.OnPage
                     fragment = new PesquisarFragment();
                     break;
                 case 1:
-                    fragment = new AmigosFragment();
+                    fragment = new PerfilFragment();
                     break;
                 case 2:
                     fragment = new RankingFragment();
                     break;
                 case 3:
-                    fragment = new HistoricoFragment();
+                    fragment = new AmigosFragment();
                     break;
                 case 4:
-                    fragment = new PerfilFragment();
+                    fragment = new HistoricoFragment();
                     break;
             }
             return fragment;
