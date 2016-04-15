@@ -65,10 +65,11 @@ public class MarkerFragmentDialog extends DialogFragment implements View.OnClick
         if (v.getId() == R.id.btnAvalie) {
             Toast.makeText(getActivity(), "Avaliar", Toast.LENGTH_LONG).show();
         } else if (v.getId() == R.id.btnFiscalize) {
-            Toast.makeText(getActivity(), "Fiscalizar", Toast.LENGTH_LONG).show();
 
             FiscalizarFragment fiscalizar = new FiscalizarFragment();
-            getFragmentManager().beginTransaction().add(fiscalizar, "teste").commit();
+            getFragmentManager().beginTransaction().add(R.id.lytRootPesquisar, fiscalizar)
+                    .addToBackStack(null)
+                    .commit();
 
             dismiss();
         } else if (v.getId() == R.id.btnFechar){

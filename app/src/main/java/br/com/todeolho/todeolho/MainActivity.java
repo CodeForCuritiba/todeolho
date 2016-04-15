@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity  implements ViewPager.OnPage
             Fragment fragment = null;
             switch (position){
                 case 0:
-                    fragment = new PesquisarFragment();
+                    fragment = new RootPesquisarFragment();
                     break;
                 case 1:
                     fragment = new PerfilFragment();
