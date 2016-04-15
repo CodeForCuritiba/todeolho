@@ -1,0 +1,108 @@
+{
+  "Questionario" : [
+    {
+      "id" : 0,
+      "pergunta" : "Como está a obra?",
+      "respostas" : [
+        {
+          "idPerguntaProx" : -1,
+          "hasField": false,
+          "resposta" : "Esta obra não existe"
+        },
+        {
+          "idPerguntaProx" : 1,
+          "hasField": false,
+          "resposta" : "Esta obra está em andamento"
+        },
+        {
+          "idPerguntaProx" : 3,
+          "hasField": false,
+          "resposta" : "Esta obra já está finalizada"
+        },
+        {
+          "idPerguntaProx" : -1,
+          "hasField": true,
+          "resposta" : "Outro"
+        }
+      ]
+    },
+    {
+      "id" : 1,
+      "pergunta" : "Esta obra iniciou dia xx/xx/xxxx e será(foi) entregue dia yy/yy/yyyy (ou algum tipo de ilustração explicativa).Pela sua percepção:",
+      "respostas" : [
+        {
+          "idPerguntaProx" : 2,
+          "hasField": false,
+          "resposta" : "Esta obra está atrasada"
+        },
+        {
+          "idPerguntaProx" : 2,
+          "hasField": false,
+          "resposta" : "Esta obra está no prazo"
+        },
+        {
+          "idPerguntaProx" : 2,
+          "hasField": false,
+          "resposta" : "Não sei informar"
+        },
+        {
+          "idPerguntaProx" : 2,
+          "hasField": true,
+          "resposta" : "Outro"
+        }
+      ]
+    },
+    {
+      "id" : 2,
+      "pergunta" : "Há pessoas trabalhando na obra neste momento? (ficamos um pouco em dúvida entre colocar assim, ou perguntar quantas pessoas estao trabalhando)",
+      "respostas" : [
+        {
+          "idPerguntaProx" : -1,
+          "hasField": false,
+          "resposta" : Sim"
+        },
+        {
+          "idPerguntaProx" : -1,
+          "hasField": false,
+          "resposta" : "Não"
+        },
+        {
+          "idPerguntaProx" : -1,
+          "hasField": false,
+          "resposta" : "Não sei"
+        },
+        {
+          "idPerguntaProx" : -1,
+          "hasField": true,
+          "resposta" : "Outro"
+        }
+      ]
+    },
+    {
+      "id" : 3,
+      "pergunta" : "Esta obra está sendo usada de acordo com sua finalidade?",
+      "respostas" : [
+        {
+          "idPerguntaProx" : -1,
+          "hasField": false,
+          "resposta" : "Sim"
+        },
+        {
+          "idPerguntaProx" : -1,
+          "hasField": false,
+          "resposta" : "Esta obra não está sendo usada"
+        },
+        {
+          "idPerguntaProx" : -1,
+          "hasField": true,
+          "resposta" : "Está sendo usada para um propósito diferente de sua finalidade (input texto: Qual?"
+        },
+        {
+          "idPerguntaProx" : -1,
+          "hasField": true,
+          "resposta" : "Outro"
+        }
+      ]
+    }
+  ]
+}
