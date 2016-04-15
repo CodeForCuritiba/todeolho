@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 /**
  * Created by gustavomagalhaes on 4/10/16.
  */
@@ -17,6 +19,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Gson gson = new Gson();
+
+        gson.
+
+
     }
 
     // Clicks dos botões
