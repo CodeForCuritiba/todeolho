@@ -1,31 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite">
+    android:fitsSystemWindows="true"
+    tools:context="br.com.gustavo.poctabbar.MainActivity">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:paddingBottom="30dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorWhite">
 
-        <br.com.todeolho.todeolho.component.CustomTextView
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            android:gravity="center_horizontal"
-            android:textColor="@color/colorWhite"
-            android:textSize="20sp"
-            android:textAllCaps="true"
-            android:text="reforma do pátio na escola estadual do paraná"/>
+            android:background="@color/colorPrimaryDark"
+            android:paddingBottom="30dp">
 
-    </FrameLayout>
+            <br.com.todeolho.todeolho.component.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:gravity="center_horizontal"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:textAllCaps="true"
+                android:text="reforma do pátio na escola estadual do paraná"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/lstPergunta"
-        android:scrollbars="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        </FrameLayout>
 
-</LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lstPergunta"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnResp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@android:drawable/ic_dialog_email" />
+
+</android.support.design.widget.CoordinatorLayout>

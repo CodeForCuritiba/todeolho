@@ -15,4 +15,6 @@
     <string name="titulo_ranking">RANKING</string>
     <string name="start_date">Início</string>
     <string name="end_date">Término</string>
+    <string name="adicionar_foto">ADICIONE UMA FOTO</string>
+    <string name="adicionar_comentario">ADICIONE UM COMENTÁRIO</string>
 </resources>

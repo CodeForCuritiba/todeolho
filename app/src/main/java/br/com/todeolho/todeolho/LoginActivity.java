@@ -3,11 +3,18 @@ package br.com.todeolho.todeolho;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+
+import br.com.todeolho.todeolho.model.Questionario;
 
 /**
  * Created by gustavomagalhaes on 4/10/16.
@@ -19,11 +26,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        Gson gson = new Gson();
-
-        gson.
-
 
     }
 

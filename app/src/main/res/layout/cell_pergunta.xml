@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="30dp">
 
-    <TextView
+    <br.com.todeolho.todeolho.component.CustomTextView
+        android:id="@+id/lblPergunta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="A OBRA ESTÁ"/>
+        android:layout_marginLeft="9dp"
+        android:paddingBottom="15dp"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:text="A obra está"/>
 
-    <RadioButton
-        android:id="@+id/radioButton"
+    <RadioGroup
+        android:id="@+id/rdogrpResp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New RadioButton"/>
+        android:layout_height="wrap_content">
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/edtOutros"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

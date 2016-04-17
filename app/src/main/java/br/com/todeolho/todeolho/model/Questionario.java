@@ -6,5 +6,5 @@ import java.util.ArrayList;
  * Created by gustavomagalhaes on 4/15/16.
  */
 public class Questionario {
-    ArrayList<Pergunta> perguntas;
+    public ArrayList<Pergunta> perguntas;
 }
