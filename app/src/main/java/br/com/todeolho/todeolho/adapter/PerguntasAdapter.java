@@ -27,7 +27,9 @@ public class PerguntasAdapter extends RecyclerView.Adapter<PerguntasAdapter.View
     private final Context context;
     private ArrayList<Pergunta> perguntas = new ArrayList<Pergunta>();
 
-    private RadioButton selected = null;
+    private ArrayList<RadioButton> respostasSelecionadas = new ArrayList<RadioButton>();
+
+    private int indicePergunta = 0;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -45,6 +47,7 @@ public class PerguntasAdapter extends RecyclerView.Adapter<PerguntasAdapter.View
     public PerguntasAdapter(Pergunta pergunta, Context context) {
         this.context = context;
         perguntas.add(pergunta);
+        respostasSelecionadas.add(indicePergunta, null);
     }
 
     // Create new views (invoked by the layout manager)
@@ -61,10 +64,6 @@ public class PerguntasAdapter extends RecyclerView.Adapter<PerguntasAdapter.View
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-//        holder.mTextView.setText(perguntas[position]);
-
         Pergunta pergunta = perguntas.get(position);
 
         CustomTextView customTextView = (CustomTextView) holder.layoutPergunta.findViewById(R.id.lblPergunta);
@@ -72,42 +71,49 @@ public class PerguntasAdapter extends RecyclerView.Adapter<PerguntasAdapter.View
 
         RadioGroup group = (RadioGroup) holder.layoutPergunta.findViewById(R.id.rdogrpResp);
 
-        if (group.getChildCount() > 0){
-            return;
+        if (group.getChildCount() == 0){
+            for (Resposta resposta : pergunta.respostas) {
+                RadioButton rda = new RadioButton(context);
+
+                rda.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                rda.setTextColor(context.getResources().getColor(R.color.colorPrimary));
+                rda.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        respostasSelecionadas.set(indicePergunta, (RadioButton) v);
+                    }
+                });
+                group.addView(rda);
+            }
         }
 
-        for (Resposta resposta:
-             pergunta.respostas) {
-            RadioButton rda = new RadioButton(context);
-            rda.setTag(resposta);
-            rda.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            rda.setTextColor(context.getResources().getColor(R.color.colorPrimary));
+        int iResposta = 0;
+        for (Resposta resposta : pergunta.respostas) {
+            RadioButton rda = (RadioButton) group.getChildAt(iResposta++);
             rda.setText(resposta.resposta);
+            rda.setTag(resposta);
 
-            rda.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    selected = (RadioButton) v;
-                }
-            });
+            if (respostasSelecionadas.get(indicePergunta) != null &&
+                    respostasSelecionadas.get(indicePergunta) == rda){
+                rda.setSelected(true);
+            }
 
-            group.addView(rda);
         }
-
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-
         return perguntas.size();
     }
 
     public Resposta getRespostaSelecionada(){
-        return (Resposta) selected.getTag();
+        return (Resposta) respostasSelecionadas.get(indicePergunta).getTag();
     }
 
     public void adicionarValor(Pergunta pergunta){
         perguntas.add(pergunta);
+        indicePergunta++;
+        respostasSelecionadas.add(indicePergunta, null);
     }
 }
