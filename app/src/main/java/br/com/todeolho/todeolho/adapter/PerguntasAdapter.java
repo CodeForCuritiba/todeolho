@@ -30,6 +30,7 @@ public class PerguntasAdapter extends RecyclerView.Adapter<PerguntasAdapter.View
     private ArrayList<RadioButton> respostasSelecionadas = new ArrayList<RadioButton>();
 
     private int indicePergunta = 0;
+    private boolean isFinalizar = false;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -87,17 +88,24 @@ public class PerguntasAdapter extends RecyclerView.Adapter<PerguntasAdapter.View
             }
         }
 
+        if (indicePergunta != position && position != 0) {
+            customTextView.setVisibility(View.GONE);
+        }
+
         int iResposta = 0;
         for (Resposta resposta : pergunta.respostas) {
             RadioButton rda = (RadioButton) group.getChildAt(iResposta++);
             rda.setText(resposta.resposta);
             rda.setTag(resposta);
 
-            if (respostasSelecionadas.get(indicePergunta) != null &&
-                    respostasSelecionadas.get(indicePergunta) == rda){
+            if (indicePergunta != position) {
+                rda.setVisibility(View.GONE);
+            }
+            if (respostasSelecionadas.get(position) != null &&
+                    respostasSelecionadas.get(position) == rda) {
+                rda.setVisibility(View.VISIBLE);
                 rda.setSelected(true);
             }
-
         }
     }
 
@@ -108,6 +116,9 @@ public class PerguntasAdapter extends RecyclerView.Adapter<PerguntasAdapter.View
     }
 
     public Resposta getRespostaSelecionada(){
+        if (isFinalizar){
+            return (Resposta) respostasSelecionadas.get(indicePergunta - 1).getTag();
+        }
         return (Resposta) respostasSelecionadas.get(indicePergunta).getTag();
     }
 
@@ -115,5 +126,13 @@ public class PerguntasAdapter extends RecyclerView.Adapter<PerguntasAdapter.View
         perguntas.add(pergunta);
         indicePergunta++;
         respostasSelecionadas.add(indicePergunta, null);
+        notifyItemInserted(getItemCount() + 1);
+        notifyDataSetChanged();
+    }
+
+    public void finalizarPerguntas(){
+        isFinalizar = true;
+        indicePergunta++;
+        notifyDataSetChanged();
     }
 }

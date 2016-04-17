@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,8 @@ public class FiscalizarFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
 
     private Questionario questionario = null;
+
+    private boolean isConfirmar = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,13 +70,18 @@ public class FiscalizarFragment extends Fragment {
 
                 if (resposta.idProxPergunta >= 0){
                     mAdapter.adicionarValor(questionario.perguntas.get(resposta.idProxPergunta));
-                    mAdapter.notifyItemInserted(mAdapter.getItemCount() + 1);
-                    mAdapter.notifyDataSetChanged();
                 }else{
-                    AdicionaFotoComentarioFragment comentarioFragment = new AdicionaFotoComentarioFragment();
-                    getFragmentManager().beginTransaction().add(R.id.lytRootPesquisar, comentarioFragment)
-                            .addToBackStack(null)
-                            .commit();
+
+                    if (isConfirmar){
+                        AdicionaFotoComentarioFragment comentarioFragment = new AdicionaFotoComentarioFragment();
+                        getFragmentManager().beginTransaction().add(R.id.lytRootPesquisar, comentarioFragment)
+                                .addToBackStack(null)
+                                .commit();
+                    }else {
+                        ((FloatingActionButton) v).setImageResource(R.drawable.ic_menu_camera);
+                        mAdapter.finalizarPerguntas();
+                        isConfirmar = true;
+                    }
                 }
             }
 
@@ -85,4 +93,5 @@ public class FiscalizarFragment extends Fragment {
 
         return v;
     }
+
 }
