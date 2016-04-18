@@ -21,6 +21,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 
 import br.com.todeolho.todeolho.adapter.PerguntasAdapter;
+import br.com.todeolho.todeolho.component.CustomTextView;
 import br.com.todeolho.todeolho.model.Questionario;
 import br.com.todeolho.todeolho.model.Resposta;
 
@@ -40,6 +41,9 @@ public class FiscalizarFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_fiscalizar, container, false);
+
+        CustomTextView lblConstrucao = (CustomTextView) v.findViewById(R.id.lblNomeConstrucao);
+        lblConstrucao.setText(getArguments().getString("lblTituloConstrucao"));
 
         mRecyclerView = (RecyclerView) v.findViewById(R.id.lstPergunta);
 

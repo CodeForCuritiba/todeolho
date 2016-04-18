@@ -130,10 +130,10 @@ public class PerguntasAdapter extends RecyclerView.Adapter<PerguntasAdapter.View
 
             if (indicePergunta != position) {
                 rda.setVisibility(View.GONE);
+                rda.setSelected(true);
             }
             if (respostasSelecionadas.get(position) != null && respostasSelecionadas.get(position) == resposta) {
                 rda.setVisibility(View.VISIBLE);
-                rda.setSelected(true);
                 if (resposta.hasField){
 
                     TextView textView = (TextView) holder.layoutPergunta.findViewById(R.id.lblOutroResposta);

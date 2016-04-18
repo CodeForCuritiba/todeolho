@@ -67,6 +67,12 @@ public class MarkerFragmentDialog extends DialogFragment implements View.OnClick
         } else if (v.getId() == R.id.btnFiscalize) {
 
             FiscalizarFragment fiscalizar = new FiscalizarFragment();
+
+            Bundle bundle = new Bundle();
+            bundle.putString("lblTituloConstrucao", marker.getTitle());
+
+            fiscalizar.setArguments(bundle);
+
             getFragmentManager().beginTransaction().add(R.id.lytRootPesquisar, fiscalizar)
                     .addToBackStack(null)
                     .commit();

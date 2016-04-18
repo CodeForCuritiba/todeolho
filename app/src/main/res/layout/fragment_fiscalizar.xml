@@ -16,18 +16,20 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:background="@color/colorPrimaryDark"
-            android:paddingBottom="30dp">
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
 
             <br.com.todeolho.todeolho.component.CustomTextView
-                android:layout_width="wrap_content"
+                android:id="@+id/lblNomeConstrucao"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="20dp"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp"
                 android:textAllCaps="true"
-                android:text="reforma do pátio na escola estadual do paraná"/>
+                android:text="ttt"/>
 
         </FrameLayout>
 
