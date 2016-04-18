@@ -7,5 +7,6 @@ public class Resposta {
     public int idProxPergunta;
     public boolean hasField;
     public String resposta;
+    public String outro;
 
 }

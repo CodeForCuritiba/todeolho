@@ -8,9 +8,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -24,10 +26,10 @@ import br.com.todeolho.todeolho.model.Resposta;
  */
 public class PerguntasAdapter extends RecyclerView.Adapter<PerguntasAdapter.ViewHolder> {
 
-    private final Context context;
+    private Context context;
     private ArrayList<Pergunta> perguntas = new ArrayList<Pergunta>();
 
-    private ArrayList<RadioButton> respostasSelecionadas = new ArrayList<RadioButton>();
+    private ArrayList<Resposta> respostasSelecionadas = new ArrayList<Resposta>();
 
     private int indicePergunta = 0;
     private boolean isFinalizar = false;
@@ -64,7 +66,7 @@ public class PerguntasAdapter extends RecyclerView.Adapter<PerguntasAdapter.View
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         Pergunta pergunta = perguntas.get(position);
 
         CustomTextView customTextView = (CustomTextView) holder.layoutPergunta.findViewById(R.id.lblPergunta);
@@ -81,11 +83,39 @@ public class PerguntasAdapter extends RecyclerView.Adapter<PerguntasAdapter.View
                 rda.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        respostasSelecionadas.set(indicePergunta, (RadioButton) v);
+
+                        final Resposta resposta1 = (Resposta) v.getTag();
+                        respostasSelecionadas.set(indicePergunta, resposta1);
+
+                        if(resposta1.hasField){
+                            EditText editText = new EditText(context);
+                            editText.setId(R.id.edtOutroResposta);
+
+                            editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                                @Override
+                                public void onFocusChange(View v, boolean hasFocus) {
+                                    if (!hasFocus){
+                                        resposta1.outro = ((EditText) v).getText().toString();
+                                    }
+                                }
+                            });
+
+                            holder.layoutPergunta.addView(editText);
+                        }else{
+                            EditText editText = (EditText) holder.layoutPergunta.findViewById(R.id.edtOutroResposta);
+                            if (editText != null){
+                                holder.layoutPergunta.removeView(editText);
+                            }
+                        }
                     }
                 });
                 group.addView(rda);
             }
+        }
+
+        EditText editText = (EditText) holder.layoutPergunta.findViewById(R.id.edtOutroResposta);
+        if (editText != null){
+            holder.layoutPergunta.removeView(editText);
         }
 
         if (indicePergunta != position && position != 0) {
@@ -101,10 +131,20 @@ public class PerguntasAdapter extends RecyclerView.Adapter<PerguntasAdapter.View
             if (indicePergunta != position) {
                 rda.setVisibility(View.GONE);
             }
-            if (respostasSelecionadas.get(position) != null &&
-                    respostasSelecionadas.get(position) == rda) {
+            if (respostasSelecionadas.get(position) != null && respostasSelecionadas.get(position) == resposta) {
                 rda.setVisibility(View.VISIBLE);
                 rda.setSelected(true);
+                if (resposta.hasField){
+
+                    TextView textView = (TextView) holder.layoutPergunta.findViewById(R.id.lblOutroResposta);
+                    if (textView == null) {
+                        textView = new TextView(context);
+                        textView.setId(R.id.lblOutroResposta);
+                        holder.layoutPergunta.addView(textView);
+                    }
+                    textView.setText(resposta.outro);
+
+                }
             }
         }
     }
@@ -117,9 +157,9 @@ public class PerguntasAdapter extends RecyclerView.Adapter<PerguntasAdapter.View
 
     public Resposta getRespostaSelecionada(){
         if (isFinalizar){
-            return (Resposta) respostasSelecionadas.get(indicePergunta - 1).getTag();
+            return (Resposta) respostasSelecionadas.get(indicePergunta - 1);
         }
-        return (Resposta) respostasSelecionadas.get(indicePergunta).getTag();
+        return (Resposta) respostasSelecionadas.get(indicePergunta);
     }
 
     public void adicionarValor(Pergunta pergunta){

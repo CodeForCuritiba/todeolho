@@ -7,17 +7,17 @@
         {
           "idProxPergunta" : -1,
           "hasField": false,
-          "resposta" : "Esta obra não existe"
+          "resposta" : "Não existe"
         },
         {
           "idProxPergunta" : 1,
           "hasField": false,
-          "resposta" : "Esta obra está em andamento"
+          "resposta" : "Está em andamento"
         },
         {
           "idProxPergunta" : 3,
           "hasField": false,
-          "resposta" : "Esta obra já está finalizada"
+          "resposta" : "Já está finalizada"
         },
         {
           "idProxPergunta" : -1,
@@ -33,12 +33,12 @@
         {
           "idProxPergunta" : 2,
           "hasField": false,
-          "resposta" : "Esta obra está atrasada"
+          "resposta" : "Está atrasada"
         },
         {
           "idProxPergunta" : 2,
           "hasField": false,
-          "resposta" : "Esta obra está no prazo"
+          "resposta" : "Está no prazo"
         },
         {
           "idProxPergunta" : 2,
@@ -90,7 +90,7 @@
         {
           "idProxPergunta" : -1,
           "hasField": false,
-          "resposta" : "Esta obra não está sendo usada"
+          "resposta" : "Não está sendo usada"
         },
         {
           "idProxPergunta" : -1,

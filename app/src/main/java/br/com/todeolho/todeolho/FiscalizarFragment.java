@@ -1,5 +1,6 @@
 package br.com.todeolho.todeolho;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import com.google.gson.Gson;
 
@@ -67,6 +69,9 @@ public class FiscalizarFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Resposta resposta = mAdapter.getRespostaSelecionada();
+
+                InputMethodManager imm = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
 
                 if (resposta.idProxPergunta >= 0){
                     mAdapter.adicionarValor(questionario.perguntas.get(resposta.idProxPergunta));
