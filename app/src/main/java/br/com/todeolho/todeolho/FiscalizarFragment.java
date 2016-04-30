@@ -1,6 +1,9 @@
 package br.com.todeolho.todeolho;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -30,6 +33,7 @@ import br.com.todeolho.todeolho.model.Resposta;
  */
 public class FiscalizarFragment extends Fragment {
 
+    public static final String ANSWER_INTENT_RECEIVER = "br.com.todeolho.ANSWER";
     private RecyclerView mRecyclerView;
     private PerguntasAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -38,14 +42,16 @@ public class FiscalizarFragment extends Fragment {
 
     private boolean isConfirmar = false;
 
+    private View mainView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_fiscalizar, container, false);
+        mainView = inflater.inflate(R.layout.fragment_fiscalizar, container, false);
 
-        CustomTextView lblConstrucao = (CustomTextView) v.findViewById(R.id.lblNomeConstrucao);
+        CustomTextView lblConstrucao = (CustomTextView) mainView.findViewById(R.id.lblNomeConstrucao);
         lblConstrucao.setText(getArguments().getString("lblTituloConstrucao"));
 
-        mRecyclerView = (RecyclerView) v.findViewById(R.id.lstPergunta);
+        mRecyclerView = (RecyclerView) mainView.findViewById(R.id.lstPergunta);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -66,41 +72,70 @@ public class FiscalizarFragment extends Fragment {
             e.printStackTrace();
         }
 
-        FloatingActionButton actionButton = (FloatingActionButton)v.findViewById(R.id.btnResp);
+//        FloatingActionButton actionButton = (FloatingActionButton)v.findViewById(R.id.btnResp);
 
-        actionButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Resposta resposta = mAdapter.getRespostaSelecionada();
-
-                InputMethodManager imm = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
-
-                if (resposta.idProxPergunta >= 0){
-                    mAdapter.adicionarValor(questionario.perguntas.get(resposta.idProxPergunta));
-                }else{
-
-                    if (isConfirmar){
-                        AdicionaFotoComentarioFragment comentarioFragment = new AdicionaFotoComentarioFragment();
-                        getFragmentManager().beginTransaction().add(R.id.lytRootPesquisar, comentarioFragment)
-                                .addToBackStack(null)
-                                .commit();
-                    }else {
-                        ((FloatingActionButton) v).setImageResource(R.drawable.ic_menu_camera);
-                        mAdapter.finalizarPerguntas();
-                        isConfirmar = true;
-                    }
-                }
-            }
-
-        });
+//        actionButton.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                Resposta resposta = mAdapter.getRespostaSelecionada();
+//
+//                InputMethodManager imm = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+//
+//                if (resposta.idProxPergunta >= 0){
+//                    mAdapter.adicionarValor(questionario.perguntas.get(resposta.idProxPergunta));
+//                }else{
+//
+//                    if (isConfirmar){
+//                        AdicionaFotoComentarioFragment comentarioFragment = new AdicionaFotoComentarioFragment();
+//                        getFragmentManager().beginTransaction().add(R.id.lytRootPesquisar, comentarioFragment)
+//                                .addToBackStack(null)
+//                                .commit();
+//                    }else {
+//                        ((FloatingActionButton) v).setImageResource(R.drawable.ic_menu_camera);
+//                        mAdapter.finalizarPerguntas();
+//                        isConfirmar = true;
+//                    }
+//                }
+//            }
+//
+//        });
 
         // specify an adapter (see also next example)
         mAdapter = new PerguntasAdapter(questionario.perguntas.get(0), getContext());
         mRecyclerView.setAdapter(mAdapter);
 
-        return v;
+        this.getContext().registerReceiver(answerReceiver, new IntentFilter(ANSWER_INTENT_RECEIVER));
+
+        return mainView;
     }
+
+    BroadcastReceiver answerReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            Resposta resposta = mAdapter.getRespostaSelecionada();
+
+            InputMethodManager imm = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+
+            if (resposta.idProxPergunta >= 0){
+                mAdapter.adicionarValor(questionario.perguntas.get(resposta.idProxPergunta));
+            }else{
+
+                if (isConfirmar){
+                    AdicionaFotoComentarioFragment comentarioFragment = new AdicionaFotoComentarioFragment();
+                    getFragmentManager().beginTransaction().add(R.id.lytRootPesquisar, comentarioFragment)
+                            .addToBackStack(null)
+                            .commit();
+                }else {
+//x                    ((FloatingActionButton) mainView).setImageResource(R.drawable.ic_menu_camera);
+                    mAdapter.finalizarPerguntas();
+                    isConfirmar = true;
+                }
+            }
+        }
+    };
 
 }

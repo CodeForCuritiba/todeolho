@@ -1,6 +1,7 @@
 package br.com.todeolho.todeolho.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import br.com.todeolho.todeolho.FiscalizarFragment;
 import br.com.todeolho.todeolho.R;
 import br.com.todeolho.todeolho.component.CustomTextView;
 import br.com.todeolho.todeolho.model.Pergunta;
@@ -107,6 +109,8 @@ public class PerguntasAdapter extends RecyclerView.Adapter<PerguntasAdapter.View
                                 holder.layoutPergunta.removeView(editText);
                             }
                         }
+
+                        context.sendBroadcast(new Intent(FiscalizarFragment.ANSWER_INTENT_RECEIVER));
                     }
                 });
                 group.addView(rda);
