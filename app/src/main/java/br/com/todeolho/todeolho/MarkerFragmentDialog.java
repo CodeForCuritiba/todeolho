@@ -70,6 +70,8 @@ public class MarkerFragmentDialog extends DialogFragment implements View.OnClick
 
             Bundle bundle = new Bundle();
             bundle.putString("lblTituloConstrucao", marker.getTitle());
+            bundle.putString(FiscalizarFragment.START_DATE, marker.getStartDate());
+            bundle.putString(FiscalizarFragment.END_DATE, marker.getEndDate());
 
             fiscalizar.setArguments(bundle);
 

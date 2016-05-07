@@ -28,7 +28,7 @@
     },
     {
       "id" : 1,
-      "pergunta" : "Esta obra iniciou dia xx/xx/xxxx e será(foi) entregue dia yy/yy/yyyy (ou algum tipo de ilustração explicativa).Pela sua percepção:",
+      "pergunta" : "Esta obra iniciou dia {start_date} e será(foi) entregue dia {end_date}. Pela sua percepção:",
       "respostas" : [
         {
           "idProxPergunta" : 2,
@@ -54,7 +54,7 @@
     },
     {
       "id" : 2,
-      "pergunta" : "Há pessoas trabalhando na obra neste momento? (ficamos um pouco em dúvida entre colocar assim, ou perguntar quantas pessoas estao trabalhando)",
+      "pergunta" : "Há pessoas trabalhando na obra neste momento?",
       "respostas" : [
         {
           "idProxPergunta" : -1,

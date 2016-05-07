@@ -25,6 +25,7 @@ import java.util.ArrayList;
 
 import br.com.todeolho.todeolho.adapter.PerguntasAdapter;
 import br.com.todeolho.todeolho.component.CustomTextView;
+import br.com.todeolho.todeolho.model.Pergunta;
 import br.com.todeolho.todeolho.model.Questionario;
 import br.com.todeolho.todeolho.model.Resposta;
 
@@ -34,6 +35,8 @@ import br.com.todeolho.todeolho.model.Resposta;
 public class FiscalizarFragment extends Fragment {
 
     public static final String ANSWER_INTENT_RECEIVER = "br.com.todeolho.ANSWER";
+    public static final String START_DATE = "start_date";
+    public static final String END_DATE = "end_date";
     private RecyclerView mRecyclerView;
     private PerguntasAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -67,17 +70,24 @@ public class FiscalizarFragment extends Fragment {
             InputStream inputStream = getActivity().getAssets().open("questionario.json");
             Reader reader = new InputStreamReader(inputStream);
             questionario = gson.fromJson(reader, Questionario.class);
+            for (Pergunta p : questionario.perguntas) {
+                p.pergunta = p.pergunta.replaceAll("\\{start_date\\}", getArguments().getString(START_DATE));
+                p.pergunta = p.pergunta.replaceAll("\\{end_date\\}", getArguments().getString(END_DATE));
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-//        FloatingActionButton actionButton = (FloatingActionButton)v.findViewById(R.id.btnResp);
+        FloatingActionButton actionButton = (FloatingActionButton)mainView.findViewById(R.id.btnResp);
 
-//        actionButton.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
+        actionButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                getContext().sendBroadcast(new Intent(FiscalizarFragment.ANSWER_INTENT_RECEIVER));
+
 //                Resposta resposta = mAdapter.getRespostaSelecionada();
 //
 //                InputMethodManager imm = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -98,11 +108,12 @@ public class FiscalizarFragment extends Fragment {
 //                        isConfirmar = true;
 //                    }
 //                }
-//            }
-//
-//        });
+            }
 
-        // specify an adapter (see also next example)
+        });
+
+        actionButton.setVisibility(View.INVISIBLE);
+
         mAdapter = new PerguntasAdapter(questionario.perguntas.get(0), getContext());
         mRecyclerView.setAdapter(mAdapter);
 
@@ -117,8 +128,8 @@ public class FiscalizarFragment extends Fragment {
 
             Resposta resposta = mAdapter.getRespostaSelecionada();
 
-            InputMethodManager imm = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+            InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(mainView.getWindowToken(), 0);
 
             if (resposta.idProxPergunta >= 0){
                 mAdapter.adicionarValor(questionario.perguntas.get(resposta.idProxPergunta));
@@ -130,7 +141,9 @@ public class FiscalizarFragment extends Fragment {
                             .addToBackStack(null)
                             .commit();
                 }else {
-//x                    ((FloatingActionButton) mainView).setImageResource(R.drawable.ic_menu_camera);
+                    FloatingActionButton actionButton = (FloatingActionButton)mainView.findViewById(R.id.btnResp);
+                    actionButton.setImageResource(R.drawable.ic_check);
+                    actionButton.setVisibility(View.VISIBLE);
                     mAdapter.finalizarPerguntas();
                     isConfirmar = true;
                 }
